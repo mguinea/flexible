@@ -25,4 +25,12 @@ final class AppTest extends TestCase
 	{
 		$this->assertInstanceOf(ContainerInterface::class, $this->app->container());
 	}
+
+	public function testNamedFactory(): void
+	{
+		$app = App::create();
+
+		$this->assertInstanceOf(App::class, $app);
+		$this->assertInstanceOf(ContainerInterface::class, $app->container());
+	}
 }
