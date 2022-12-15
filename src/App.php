@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Flexible;
 
+use Psr\Clock\ClockInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -18,7 +19,8 @@ class App implements RequestHandlerInterface
 	public function __construct(
 		private ContainerInterface $container,
 		private ResponseFactoryInterface $responseFactory,
-		private LoggerInterface $logger
+		private LoggerInterface $logger,
+		private ClockInterface $clock
 	) {
 	}
 
@@ -30,6 +32,11 @@ class App implements RequestHandlerInterface
 	public function logger(): LoggerInterface
 	{
 		return $this->logger;
+	}
+
+	public function clock(): ClockInterface
+	{
+		return $this->clock;
 	}
 
 	public function handle(ServerRequestInterface $request): ResponseInterface
