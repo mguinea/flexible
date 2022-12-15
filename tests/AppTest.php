@@ -7,6 +7,7 @@ namespace FlexibleTests;
 use Flexible\App;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 
 final class AppTest extends TestCase
 {
@@ -17,7 +18,8 @@ final class AppTest extends TestCase
 		parent::setUp();
 
 		$this->app = new App(
-			$this->createMock(ContainerInterface::class)
+			$this->createMock(ContainerInterface::class),
+			$this->createMock(ResponseFactoryInterface::class)
 		);
 	}
 
