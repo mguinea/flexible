@@ -21,10 +21,10 @@ class App implements RequestHandlerInterface
 	public const VERSION = 'dev';
 
 	public function __construct(
-		private ContainerInterface $container,
-		private ResponseFactoryInterface $responseFactory,
-		private LoggerInterface $logger,
-		private ClockInterface $clock
+		protected ContainerInterface $container,
+		protected ResponseFactoryInterface $responseFactory,
+		protected LoggerInterface $logger,
+		protected ClockInterface $clock
 	) {
 	}
 
