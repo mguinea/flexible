@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Log\LoggerInterface;
 
 class App implements RequestHandlerInterface
 {
@@ -16,13 +17,19 @@ class App implements RequestHandlerInterface
 
 	public function __construct(
 		private ContainerInterface $container,
-		private ResponseFactoryInterface $responseFactory
+		private ResponseFactoryInterface $responseFactory,
+		private LoggerInterface $logger
 	) {
 	}
 
 	public function container(): ContainerInterface
 	{
 		return $this->container;
+	}
+
+	public function logger(): LoggerInterface
+	{
+		return $this->logger;
 	}
 
 	public function handle(ServerRequestInterface $request): ResponseInterface
