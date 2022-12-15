@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Flexible;
 
+use Flexible\Clock\Clock;
+use Flexible\Logger\Logger;
+use League\Container\Container;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Clock\ClockInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -22,6 +26,21 @@ class App implements RequestHandlerInterface
 		private LoggerInterface $logger,
 		private ClockInterface $clock
 	) {
+	}
+
+	public static function create(
+		?ContainerInterface $container = null,
+		?ResponseFactoryInterface $responseFactory = null,
+		?LoggerInterface $logger = null,
+		?ClockInterface $clock = null
+	): self
+	{
+		return new self(
+			$container ?? new Container(),
+			$responseFactory ?? new Psr17Factory(),
+			$logger ?? new Logger(),
+			$clock ?? new Clock()
+		);
 	}
 
 	public function container(): ContainerInterface
