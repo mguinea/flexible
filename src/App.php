@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Flexible;
 
-use League\Container\Container;
-use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -18,17 +16,6 @@ class App implements RequestHandlerInterface
 		private ContainerInterface $container,
 		private ResponseFactoryInterface $responseFactory
 	) {
-	}
-
-	public static function create(
-		?ContainerInterface $container = null,
-		?ResponseFactoryInterface $responseFactory = null
-	): self
-	{
-		return new self(
-			$container ?? new Container(),
-			$responseFactory ?? new Psr17Factory()
-		);
 	}
 
 	public function container(): ContainerInterface
